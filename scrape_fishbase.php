@@ -277,7 +277,7 @@
 	//asort($randsample); echo "There are ".count($randsample)." randomly selected species.\n";
 	echo "FishBase scrape started: ".$t0."\n";
 	for($i=0; $k<$fishbase_max_id; ++$i) {				
-		if($i % 20 == 0) echo $i."\n";
+		if($i % 500 == 0) echo $i."\n";
 		
 		libxml_use_internal_errors(true);
 		$feed = simplexml_load_file("http://www.fishbase.us/webservice/summary/fb/showXML.php?identifier=FB-".$i);
