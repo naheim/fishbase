@@ -1,8 +1,4 @@
-<?php
-	#require('~/Box/Includes/directoryinfo.php');
-	#include('~/Box/Includes/connect.php');
-	include('../../Box/Includes/functions.php');
-	
+<?php	
 	// internal functions
 	// extract reference from string and return ref id
 	function getRef($fbstring) {
