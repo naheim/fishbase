@@ -247,7 +247,7 @@
 	
 	
 	$t0 = microtime(true);
-	$fishbase_max_id = 100000;
+	$fishbase_max_id = 15000;
 	$column_names = array(
 		'fb_taxon_id','taxon_name','taxon_uri','phylum','class','order','family','genus',
 		'sl_mm','sl_sex','sl_ref','tl_mm','tl_sex','tl_ref','fl_mm','fl_sex','fl_ref','dw_mm','dw_sex','dw_ref','max_weight_g','max_weight_ref',
