@@ -6,26 +6,40 @@
 	
 	$t0 = microtime(true);
 	
+	$append_existing_file = true;
 	$fishbase_max_id = 15000;
-	$column_names = array(
-		'fb_taxon_id','taxon_name','taxon_uri','phylum','class','order','family','genus',
-		'sl_mm','sl_sex','sl_ref','tl_mm','tl_sex','tl_ref','fl_mm','fl_sex','fl_ref','dw_mm','dw_sex','dw_ref','max_weight_g','max_weight_ref',
-		'benthic','pelagic','benthopelagic','bathypelagic','pelagic-neritic','pelagic-oceanic','demersal','reef-associated',
-		'anadromous','catadromous','amphidromous','potamodromous','limnodromous','oceanodromous','non-migratory',
-		'freshwater','brackish','marine',
-		'use_fisheries','use_aquaculture','use_gamefish','use_bait','use_aquarium','use_ref',
-		'phylo_div','phylo_div_ref',
-		'troph_level','troph_level_se','troph_level_ref',
-		'resil','resil_ref','resil_K','resil_tm','resil_tmax','resil_fec',
-		'vulnerab','vulnerab_ref','price','price_ref',
-		'main_ref'
-	);
+	$fishbase_min_id = 2;
+	
+	if($append_existing_file == true) {
+		$column_names = array(
+			'fb_taxon_id','taxon_name','taxon_uri','phylum','class','order','family','genus',
+			'sl_mm','sl_sex','sl_ref','tl_mm','tl_sex','tl_ref','fl_mm','fl_sex','fl_ref','dw_mm','dw_sex','dw_ref','max_weight_g','max_weight_ref',
+			'benthic','pelagic','benthopelagic','bathypelagic','pelagic-neritic','pelagic-oceanic','demersal','reef-associated',
+			'anadromous','catadromous','amphidromous','potamodromous','limnodromous','oceanodromous','non-migratory',
+			'freshwater','brackish','marine',
+			'use_fisheries','use_aquaculture','use_gamefish','use_bait','use_aquarium','use_ref',
+			'phylo_div','phylo_div_ref',
+			'troph_level','troph_level_se','troph_level_ref',
+			'resil','resil_ref','resil_K','resil_tm','resil_tmax','resil_fec',
+			'vulnerab','vulnerab_ref','price','price_ref',
+			'main_ref'
+		);
+		$fh = fopen("fishbase_data.txt", "w");
+		$file_row = implode("\t",$column_names)."\n";
+		fwrite($fh, $file_row);	
+	} else {
+		
+		// get last id & set to min search id
+		$fh2 = fopen("fishbase_data.txt", "r");
+		while ($file_row = fgetcsv($fh2, 1000, "\t")) !== FALSE) $fbid = $file_row[0];
+        fclose($fh2);
+		$fishbase_min_id = $fbid;
+
+		$fh = fopen("fishbase_data.txt", "a");
+	}
 	$fh2 = fopen("missedTaxa.txt", "w");
 	fwrite($fh2, "fb_id\tspecies_name\n");	
 	
-	$fh = fopen("fishbase_data.txt", "w");
-	$file_row = implode("\t",$column_names)."\n";
-	fwrite($fh, $file_row);	
 	$bluefintuna = 147;
 	$clownfish = 9209;
 	$sardine = 1043;
@@ -35,7 +49,7 @@
 	//$randsample = array($bluefintuna,$clownfish,$sardine,$cod);
 	//asort($randsample); echo "There are ".count($randsample)." randomly selected species.\n";
 	echo "FishBase scrape started: ".$t0."\n";
-	for($i=0; $k<$fishbase_max_id; ++$i) {				
+	for($i=$fishbase_min_id; $i<$fishbase_max_id; ++$i) {				
 		if($i % 500 == 0) echo $i."\n";
 		
 		libxml_use_internal_errors(true);
