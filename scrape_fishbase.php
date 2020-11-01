@@ -13,7 +13,7 @@
 	if($append_existing_file == true) {
 		// get last id & set to min search id
 		$fh2 = fopen("fishbase_data.txt", "r");
-		while ($file_row = fgetcsv($fh2, 1000, "\t")) !== FALSE) $fbid = $file_row[0];
+		while ($file_row = fgetcsv($fh2, 1000, "\t")) $fbid = $file_row[0];
         fclose($fh2);
 		$fishbase_min_id = $fbid;
 
