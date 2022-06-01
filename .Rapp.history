@@ -1,0 +1,22 @@
+x <- read.delim("fishbase_data.txt")
+nrow(x)
+head(x)
+apply(x, 2, class)
+unique(x$sl_mm)
+sort(unique(x$sl_mm))
+sl <- as.numeric(unique(x$sl_mm))
+sl
+head(x)
+plot(x[,1])
+64706 < 15001
+nrow(x)
+1/54
+1/54*100
+41/54*100
+51/54*100
+45/54*100
+46/54*100
+47/54*100
+51/54
+52/54
+q()

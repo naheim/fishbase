@@ -1,5 +1,8 @@
 <?php	
-	// internal functions
+	# custom functions for extracting information from fishbase
+	# Written by Noel A. Heim, Tufts University, noel.heim@tufts.edu
+	# Last modified 20 November 2020
+	
 	// extract reference from string and return ref id
 	function getRef($fbstring) {
 		$x = array();
